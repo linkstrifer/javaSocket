@@ -31,10 +31,6 @@ class server {
 
           int port = receivePacket.getPort();
 
-          String capitalizedSentence=sentence.toUpperCase();
-
-          
-          
           Calendar date = Calendar.getInstance();
           int second = date.get(Calendar.SECOND);
           int minute = date.get(Calendar.MINUTE);
@@ -51,9 +47,9 @@ class server {
              new DatagramPacket(sendData, sendData.length, IPAddress,port);
 
           serverSocket.send(sendPacket);
-          File log = new File("log/"+ip+"-"+second+"-"+minute+"-"+hour+"-"+day+"-"+month+"-"+year+".txt");
+          File log = new File("log/access_log.html");
           FileWriter writer = new FileWriter(log,true);
-          writer.write(second+"-"+minute+"-"+hour+"-"+day+"-"+month+"-"+year+" "+IPAddress.getHostAddress()+": "+sentence);
+          writer.write("<p>"+second+"-"+minute+"-"+hour+"-"+day+"-"+month+"-"+year+" "+IPAddress.getHostAddress()+": <b>"+sentence+"</b>");
           writer.close();
           System.out.println("Respondiendo a peticiones desde el puerto "+port+" direccion IP:"+IPAddress);
           System.out.println("Usted envio el siguiente mensaje: "+sentence);
